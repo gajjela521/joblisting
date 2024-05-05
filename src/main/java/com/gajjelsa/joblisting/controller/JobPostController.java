@@ -11,12 +11,12 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8080")
 public class JobPostController {
     @Autowired
     JobPostRepository repo;
     @ApiIgnore
-    @PostMapping(value="/")
+    @RequestMapping(value="/")
     public void redirect(HttpServletResponse response) throws IOException {
         response.sendRedirect("/swagger-ui.html");
     }
@@ -25,7 +25,7 @@ public class JobPostController {
     public List<JobPost> getAllJobPosts(){
      return repo.findAll();
     }
-    @PostMapping("/post")
+    @PostMapping(value="/post")
     @CrossOrigin
     public JobPost addPost(@RequestBody JobPost jobpost){
         return repo.save(jobpost);
