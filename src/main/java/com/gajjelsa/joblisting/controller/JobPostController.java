@@ -1,7 +1,8 @@
 package com.gajjelsa.joblisting.controller;
 
-import com.gajjelsa.joblisting.JobPostRepository;
+import com.gajjelsa.joblisting.repository.JobPostRepository;
 import com.gajjelsa.joblisting.model.JobPost;
+import com.gajjelsa.joblisting.repository.SearchRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,8 @@ import java.util.List;
 public class JobPostController {
     @Autowired
     JobPostRepository repo;
+    @Autowired
+    SearchRepository searchrepo;
     @ApiIgnore
     @RequestMapping(value="/")
     public void redirect(HttpServletResponse response) throws IOException {
@@ -24,6 +27,11 @@ public class JobPostController {
     @CrossOrigin
     public List<JobPost> getAllJobPosts(){
      return repo.findAll();
+    }
+    @GetMapping("/posts/{text}")
+    @CrossOrigin
+    public List<JobPost> search(@PathVariable String text){
+        return searchrepo.findByText(text);
     }
     @PostMapping(value="/post")
     @CrossOrigin
