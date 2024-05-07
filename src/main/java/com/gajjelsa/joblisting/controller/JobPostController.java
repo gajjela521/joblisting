@@ -17,7 +17,7 @@ public class JobPostController {
     @Autowired
     JobPostRepository repo;
     @Autowired
-    SearchRepository searchrepo;
+    SearchRepository srepo;
     @ApiIgnore
     @RequestMapping(value="/")
     public void redirect(HttpServletResponse response) throws IOException {
@@ -31,7 +31,7 @@ public class JobPostController {
     @GetMapping("/posts/{text}")
     @CrossOrigin
     public List<JobPost> search(@PathVariable String text){
-        return searchrepo.findByText(text);
+        return srepo.findByText(text);
     }
     @PostMapping(value="/post")
     @CrossOrigin
