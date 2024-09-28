@@ -46,6 +46,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+          
+      - name: Check Java version
+        run: java -version
+        
       - name: Analyze with SonarQube
 
         # You can pin the exact commit or the version.
